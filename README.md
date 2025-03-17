@@ -35,3 +35,24 @@ Performs multi-band noise reduction using spectral gating to suppress noise acro
 Enhances noise reduction by applying a Wiener filter.
 Uses a larger moving average window (20 ms) for additional smoothing.
 Normalizes the final output to ensure that the maximum amplitude remains within acceptable limits.
+
+
+SNR Calculation Scripts
+
+snr.m: Overall SNR Calculation
+
+Estimates the overall Signal-to-Noise Ratio (SNR) of an audio file.
+Assumes that low-energy segments (lowest 10% of frames) are dominated by noise and calculates the SNR based on the ratio of signal power to estimated noise power.
+
+ssnr.m: Segmental SNR (SSNR) Calculation
+
+Divides the audio into overlapping frames and computes the per-frame SNR.
+Clips the per-frame SNR values to a specified range (e.g., -10 dB to 35 dB) and then averages them to yield the segmental SNR.
+Provides a robust metric that better reflects the perceived quality over short segments of audio.
+
+fwsnr.m: Frequency Weighted SNR (FWSNR) Calculation
+
+Computes the spectrogram of the audio to analyze its power distribution across frequency bins.
+Estimates noise power for each frequency bin by averaging the lowest 10% of power values.
+Applies an A-weighting function to mimic the human ear’s sensitivity across frequencies.
+Combines the weighted signal and noise powers to compute the overall Frequency Weighted SNR.
